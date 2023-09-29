@@ -30,11 +30,49 @@ import Notifications from "views/admin/profile/components/Notifications";
 import Projects from "views/admin/profile/components/Projects";
 import Storage from "views/admin/profile/components/Storage";
 import Upload from "views/admin/profile/components/Upload";
+import PieCard from "views/admin/default/components/PieCard";
 
 // Assets
 import banner from "assets/img/auth/banner.png";
 import avatar from "assets/img/avatars/avatar4.png";
 import React from "react";
+
+import Project1 from "assets/img/profile/Project1.png";
+import Project2 from "assets/img/profile/Project2.png";
+import Project3 from "assets/img/profile/Project3.png";
+const mockTransactionsData = [
+  {
+    asset: "Bitcoin",
+    image:
+      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+  },
+  {
+    asset: "Ethereum",
+    image:
+      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+  },
+];
+
+const mockCryptoData = [
+  {
+    asset: "Bitcoin",
+    image:
+      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    price:4
+  },
+  {
+    asset: "Ethereum",
+    image:
+      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    price: 1
+  },
+  {
+    asset: "Dogecoin",
+    image:
+      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
+    price: 2
+  },
+];
 
 export default function Overview() {
   return (
@@ -49,34 +87,36 @@ export default function Overview() {
           base: "repeat(3, 1fr)",
           lg: "1fr",
         }}
-        gap={{ base: "20px", xl: "20px" }}>
+        gap={{ base: "20px", xl: "20px" }}
+      >
         <Banner
-          gridArea='1 / 1 / 2 / 2'
+          gridArea="1 / 1 / 2 / 2"
           banner={banner}
           avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
+          name="Adela Parkson"
+          job="Product Designer"
+          posts="17"
+          followers="9.7k"
+          following="274"
         />
-        <Storage
+        {/* <Storage
           gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
           used={25.6}
           total={50}
-        />
+        /> */}
+        <PieCard data={mockCryptoData}/>
         <Upload
           gridArea={{
             base: "3 / 1 / 4 / 2",
             lg: "1 / 3 / 2 / 4",
           }}
           minH={{ base: "auto", lg: "420px", "2xl": "365px" }}
-          pe='20px'
+          pe="20px"
           pb={{ base: "100px", lg: "20px" }}
         />
       </Grid>
       <Grid
-        mb='20px'
+        mb="20px"
         templateColumns={{
           base: "1fr",
           lg: "repeat(2, 1fr)",
@@ -87,23 +127,21 @@ export default function Overview() {
           lg: "repeat(2, 1fr)",
           "2xl": "1fr",
         }}
-        gap={{ base: "20px", xl: "20px" }}>
+        gap={{ base: "20px", xl: "20px" }}
+      >
         <Projects
-          gridArea='1 / 2 / 2 / 2'
+          gridArea="1 / 2 / 2 / 2"
           banner={banner}
           avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
+          name="Adela Parkson"
+          job="Product Designer"
+          posts="17"
+          followers="9.7k"
+          following="274"
+          data={mockTransactionsData}
         />
-        <General
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          minH='365px'
-          pe='20px'
-        />
-        <Notifications
+        <PieCard data={mockCryptoData}/>
+        {/* <Notifications
           used={25.6}
           total={50}
           gridArea={{
@@ -111,7 +149,7 @@ export default function Overview() {
             lg: "2 / 1 / 3 / 3",
             "2xl": "1 / 3 / 2 / 4",
           }}
-        />
+        /> */}
       </Grid>
     </Box>
   );

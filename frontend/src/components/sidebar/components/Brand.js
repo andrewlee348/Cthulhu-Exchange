@@ -7,13 +7,16 @@ import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { HorizonLogo } from "components/icons/Icons";
 import { HSeparator } from "components/separator/Separator";
 
+import CthuluLogo from "assets/img/logos/Cthulu.png"
+
 export function SidebarBrand() {
   //   Chakra color mode
   let logoColor = useColorModeValue("navy.700", "white");
 
   return (
     <Flex align='center' direction='column'>
-      <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} />
+      {/* <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} /> */}
+      <img src={CthuluLogo} alt="Logo" width="250px" />
       <HSeparator mb='20px' />
     </Flex>
   );

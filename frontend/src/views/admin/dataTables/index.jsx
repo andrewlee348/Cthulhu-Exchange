@@ -1,8 +1,9 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
-import { columnsDataColumns } from "views/admin/dataTables/variables/columnsData";
-import React from "react";
-import { column } from "stylis";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import { columnsDataColumns } from "views/admin/dataTables/variables/columnsData";
+// import { column } from "stylis";
 
 export const colassets = [
   {
@@ -50,8 +51,29 @@ const mockData = [
   },
 ];
 
+const API_BASE_URL = "http://127.0.0.1:5000";
+
 export default function Settings() {
-  // Chakra Color Mode
+  const [cryptoData, setCryptoData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/get_allcrypto`);
+        const formattedData = response.data.map(rawData => ({
+          asset: rawData.symbol.toUpperCase(),
+          change: rawData.price_change_24h,
+          marketCap: new Date(rawData.last_updated).toLocaleDateString(),
+          price: rawData.current_price,
+        }));
+        setCryptoData(formattedData);
+        console.log(formattedData);
+      } catch (error) {
+        console.error("Error fetching get_allcrypto:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
@@ -59,7 +81,7 @@ export default function Settings() {
         columns={{ sm: 1, md: 1 }}
         spacing={{ base: "20px", xl: "20px" }}
       >
-        <ColumnsTable columnsData={colassets} tableData={mockData} />
+        <ColumnsTable columnsData={colassets} tableData={cryptoData} />
       </SimpleGrid>
     </Box>
   );

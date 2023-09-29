@@ -1,2 +1,12 @@
+# frontend
 node_modules
 package-lock.json
+
+# backend
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.idea/

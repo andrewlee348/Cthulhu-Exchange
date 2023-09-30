@@ -15,6 +15,7 @@ import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
+import Coin from "views/admin/coin";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
@@ -25,7 +26,7 @@ const routes = [
   {
     name: "Home",
     layout: "/admin",
-    path: "/default",
+    path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
@@ -49,6 +50,21 @@ const routes = [
       />
     ),
     component: NFTMarketplace,
+    secondary: true,
+  },
+  {
+    name: "Coin",
+    layout: "/admin",
+    path: "/coin",
+    icon: (
+      <Icon
+        as={MdOutlineShoppingCart}
+        width='20px'
+        height='20px'
+        color='inherit'
+      />
+    ),
+    component: Coin,
     secondary: true,
   },
   {

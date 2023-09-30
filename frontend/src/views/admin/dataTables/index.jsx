@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 // import { columnsDataColumns } from "views/admin/dataTables/variables/columnsData";
 // import { column } from "stylis";
 
@@ -59,11 +59,14 @@ export default function Settings() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/get_allcrypto`);
-        const formattedData = response.data.map(rawData => ({
+        const formattedData = response.data.map((rawData) => ({
           asset: rawData.symbol.toUpperCase(),
-          change: rawData.price_change_24h,
-          marketCap: new Date(rawData.last_updated).toLocaleDateString(),
-          price: rawData.current_price,
+          change:
+            parseFloat(rawData.price_change_percentage_24h).toFixed(2) + "%",
+          marketCap: "$ " + rawData.market_cap.toLocaleString(),
+          price: "$ " + parseFloat(rawData.current_price).toFixed(2),
+          id: rawData.id,
+          image: rawData.image,
         }));
         setCryptoData(formattedData);
         console.log(formattedData);

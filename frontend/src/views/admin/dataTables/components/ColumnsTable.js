@@ -9,19 +9,30 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   useGlobalFilter,
   usePagination,
   useSortBy,
   useTable,
 } from "react-table";
+import { useHistory } from "react-router-dom";
 
 // Custom components
 import Card from "components/card/Card";
 import Menu from "components/menu/MainMenu";
+
 export default function ColumnsTable(props) {
   const { columnsData, tableData } = props;
+
+  const [hoveredRow, setHoveredRow] = useState(null);
+  const history = useHistory();
+  const handleRowHover = (index) => {
+    setHoveredRow(index);
+  };
+  const handleRowMouseLeave = () => {
+    setHoveredRow(null);
+  }
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -44,7 +55,7 @@ export default function ColumnsTable(props) {
     prepareRow,
     initialState,
   } = tableInstance;
-  initialState.pageSize = 5;
+  initialState.pageSize = 100;
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
@@ -60,7 +71,7 @@ export default function ColumnsTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Crypotcurrencies
+          Cryptocurrencies
         </Text>
         <Menu />
       </Flex>
@@ -90,13 +101,23 @@ export default function ColumnsTable(props) {
           {page.map((row, index) => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={index}>
+              < Tr {...row.getRowProps()} key={index} onClick={() => history.push("/admin/coin/" + row.original.id)}
+                onMouseEnter={() => handleRowHover(index)}
+                onMouseLeave={handleRowMouseLeave}
+                style={{
+                  backgroundColor: hoveredRow === index ? "#FFF5C8" : "transparent", cursor: "pointer"
+                }}>
                 {row.cells.map((cell, index) => {
                   let data = "";
                   if (cell.column.Header === "Asset") {
                     data = (
                       <Flex align='center'>
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
+                        <img
+                          src={row.original.image}
+                          alt={row.original.id}
+                          style={{ width: "40px", height: "40px" }}
+                        />
+                        <Text color={textColor} fontSize='sm' fontWeight='700' ml="13px">
                           {cell.value}
                         </Text>
                       </Flex>
@@ -109,14 +130,16 @@ export default function ColumnsTable(props) {
                           color={textColor}
                           fontSize='sm'
                           fontWeight='700'>
-                          {cell.value}%
+                          {cell.value}
                         </Text>
                       </Flex>
                     );
                   } else if (cell.column.Header === "Change (24h)") {
                     data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
+                      <Text color={parseFloat(cell.value) >= 0 ? "#008000" : "#d33854"} fontSize='sm' fontWeight='700' >
+                        {parseFloat(cell.value) >= 0 ? "▲" : "▼"}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {Math.abs(parseFloat(cell.value))}
                       </Text>
                     );
                   } else if (cell.column.Header === "Market cap") {
@@ -142,6 +165,6 @@ export default function ColumnsTable(props) {
           })}
         </Tbody>
       </Table>
-    </Card>
+    </Card >
   );
 }

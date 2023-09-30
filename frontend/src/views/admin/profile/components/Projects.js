@@ -8,6 +8,8 @@ import Project3 from "assets/img/profile/Project3.png";
 import Card from "components/card/Card.js";
 import React from "react";
 import Project from "views/admin/profile/components/Project";
+import Transaction from "views/admin/profile/components/Transaction";
+
 
 export default function Projects(props) {
   // Chakra Color Mode
@@ -25,21 +27,26 @@ export default function Projects(props) {
         fontSize='2xl'
         mt='10px'
         mb='4px'>
-        All projects
+        Transaction History
       </Text>
       <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        Here you can find more details about your projects. Keep you user
-        engaged by providing meaningful information.
+        A 7 day history of your recent transactions
       </Text>
-      <Project
-        boxShadow={cardShadow}
-        mb='20px'
-        image={Project1}
-        ranking='1'
-        link='#'
-        title='Technology behind the Blockchain'
-      />
-      <Project
+      {props.data.map((t, index) => (
+        <Transaction
+          boxShadow={cardShadow}
+          mb='20px'
+          image={t.image}
+          ranking='1'
+          link='#'
+          title= {t.asset}
+        />
+      ))}
+    </Card>
+  );
+}
+
+{/* <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project2}
@@ -53,7 +60,4 @@ export default function Projects(props) {
         ranking='3'
         link='#'
         title='Most essential tips for Burnout'
-      />
-    </Card>
-  );
-}
+      /> */}

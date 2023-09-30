@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Icon } from "@chakra-ui/react";
+import { Icon, useColorModeValue } from "@chakra-ui/react";
 import {
   MdBarChart,
   MdPerson,
@@ -15,20 +15,30 @@ import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
+import Coin from "views/admin/coin";
 
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 
+// const bkgColor = useColorModeValue("#white", "#FFAF00");
+// const bkgColor = '#FFAF00'
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Home",
     layout: "/admin",
-    path: "/default",
+    path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
   {
-    name: "NFT Marketplace",
+    name: "Explore",
+    layout: "/admin",
+    icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
+    path: "/explore",
+    component: DataTables,
+  },
+  {
+    name: "nft",
     layout: "/admin",
     path: "/nft-marketplace",
     icon: (
@@ -43,14 +53,22 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Data Tables",
+    name: "Coin",
     layout: "/admin",
-    icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
-    path: "/data-tables",
-    component: DataTables,
+    path: "/coin",
+    icon: (
+      <Icon
+        as={MdOutlineShoppingCart}
+        width='20px'
+        height='20px'
+        color='inherit'
+      />
+    ),
+    component: Coin,
+    secondary: true,
   },
   {
-    name: "Profile",
+    name: "Portfolio",
     layout: "/admin",
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,

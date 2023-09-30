@@ -13,8 +13,8 @@ import routes from 'routes.js';
 export default function Dashboard(props) {
 	const { ...rest } = props;
 	// states and functions
-	const [ fixed ] = useState(false);
-	const [ toggleSidebar, setToggleSidebar ] = useState(false);
+	const [fixed] = useState(false);
+	const [toggleSidebar, setToggleSidebar] = useState(false);
 	// functions for changing the states from components
 	const getRoute = () => {
 		return window.location.pathname !== '/admin/full-screen-maps';
@@ -140,13 +140,13 @@ export default function Dashboard(props) {
 							<Box mx='auto' p={{ base: '20px', md: '30px' }} pe='20px' minH='100vh' pt='50px'>
 								<Switch>
 									{getRoutes(routes)}
-									<Redirect from='/' to='/admin/default' />
+									<Redirect from='/' to='/admin/home' />
 								</Switch>
 							</Box>
 						) : null}
-						<Box>
+						{/* <Box>
 							<Footer />
-						</Box>
+						</Box> */}
 					</Box>
 				</SidebarContext.Provider>
 			</Box>

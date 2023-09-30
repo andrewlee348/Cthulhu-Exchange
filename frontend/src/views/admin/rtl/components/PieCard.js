@@ -3,12 +3,52 @@ import { Box, Flex, Text, Select, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
 import PieChart from "components/charts/PieChart";
-import { pieChartData, pieChartOptions } from "variables/charts";
 import { VSeparator } from "components/separator/Separator";
 import React from "react";
 
+
 export default function Conversion(props) {
   const { ...rest } = props;
+
+
+  const pieChartOptions = {
+    labels: ["Your files", "System", "Empty"],
+    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    chart: {
+      width: "50px",
+    },
+    states: {
+      hover: {
+        filter: {
+          type: "none",
+        },
+      },
+    },
+    legend: {
+      show: false,
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    hover: { mode: null },
+    plotOptions: {
+      donut: {
+        expandOnClick: false,
+        donut: {
+          labels: {
+            show: false,
+          },
+        },
+      },
+    },
+    fill: {
+      colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    },
+    tooltip: {
+      enabled: true,
+      theme: "dark",
+    },
+  };
 
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");

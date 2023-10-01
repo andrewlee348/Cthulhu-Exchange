@@ -53,7 +53,7 @@ export default function Marketplace() {
         setCoinData(response.data[0]);
         setGraphData(response.data[1]);
         // setGraphPoints(graphData.map((p) => p[0]));
-        console.log("coin data: ", response.data);
+        // console.log("graph data: ", response.data);
       } catch (error) {
         console.error("Error fetching coin:", error);
       }
@@ -130,7 +130,6 @@ export default function Marketplace() {
                   <Chart
                     coinData={coinData}
                     graphData={graphData}
-                    graphPoints={graphPoints}
                   />
                 </SimpleGrid>
                 <SimpleGrid

@@ -3,7 +3,11 @@ import {
   Box,
   Button,
   Flex,
+  FormLabel,
+  Grid,
+  GridItem,
   Icon,
+  Input,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -43,7 +47,7 @@ export default function TotalSpent(props) {
       justifyContent="center"
       align="center"
       direction="column"
-      w="100%"
+      w="70%"
       mb="0px"
       padding="15px 30px 30px 30px"
       {...rest}
@@ -64,31 +68,65 @@ export default function TotalSpent(props) {
           </Text>
         </Flex>
       </Flex>
-      <Flex justify="flex-start">
-        <Button
-          variant="darkBrand"
-          color="white"
-          fontSize="sm"
-          fontWeight="500"
-          borderRadius="70px"
-          px="16px"
-          py="5px"
-        >
-          Deposit
-        </Button>
-        <Button
-          variant="darkBrand"
-          color="white"
-          fontSize="sm"
-          fontWeight="500"
-          borderRadius="70px"
-          px="16px"
-          py="5px"
-          ml="10px"
-        >
-          Withdraw
-        </Button>
-      </Flex>
+      <Grid templateColumns="repeat(2,1fr)" gap={4} mt="10px">
+        <GridItem>
+          <Flex flexDirection="column" alignItems={"flex-start"}>
+            <Input
+              isRequired={true}
+              variant="auth"
+              fontSize="sm"
+              ms={{ base: "0px", md: "0px" }}
+              type="email"
+              placeholder="Deposit Amount"
+              fontWeight="500"
+              size="lg"
+            />
+            <Button
+              variant="darkBrand"
+              color="white"
+              fontSize="sm"
+              fontWeight="500"
+              borderRadius="70px"
+              px="16px"
+              py="5px"
+              mt="8px"
+            >
+              Deposit
+            </Button>
+          </Flex>
+        </GridItem>
+        <GridItem>
+          <Flex flexDirection="column" alignItems={"flex-start"}>
+            <Input
+              isRequired={true}
+              variant="auth"
+              fontSize="sm"
+              ms={{ base: "0px", md: "0px" }}
+              type="email"
+              placeholder="Withdrawal Amount"
+              fontWeight="500"
+              size="lg"
+            />
+            <Button
+              variant="darkBrand"
+              color="white"
+              fontSize="sm"
+              fontWeight="500"
+              borderRadius="70px"
+              px="16px"
+              py="5px"
+              mt="8px"
+            >
+              Withdraw
+            </Button>
+          </Flex>
+        </GridItem>
+      </Grid>
+      {/* <Flex flexDirection="row" justifyContent={"space-evenly"} mt="15px">
+        
+        
+      </Flex> */}
+
       {/* <Flex w="100%" flexDirection={{ base: "column", lg: "row" }}>
         <Flex flexDirection="column" me="20px" mt="5px">
           <Flex align="center" mb="20px" mt="10px">

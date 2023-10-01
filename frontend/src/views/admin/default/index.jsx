@@ -52,6 +52,8 @@ import DailyTraffic from "views/admin/default/components/DailyTraffic";
 import PieCard from "views/admin/default/components/PieCard";
 import Tasks from "views/admin/default/components/Tasks";
 import TotalSpent from "views/admin/default/components/TotalSpent";
+import Wallet from "views/admin/default/components/Wallet";
+import Crypto from "views/admin/default/components/Crypto";
 import WeeklyRevenue from "views/admin/default/components/WeeklyRevenue";
 import {
   columnsDataCheck,
@@ -81,8 +83,8 @@ export default function UserReports() {
         >
           <Flex direction="column">
             <Flex
-              mt="45px"
-              mb="20px"
+              mt="0px"
+              mb="0px"
               justifyContent="space-between"
               direction={{ base: "column", md: "row" }}
               align={{ base: "start", md: "center" }}
@@ -123,8 +125,8 @@ export default function UserReports() {
               gap="0px"
               mb={{ base: "20px", xl: "0px" }}
             >
-              <Text
-                mt="45px"
+              {/* <Text
+                mt="0px"
                 mb="36px"
                 color={textColor}
                 fontSize="2xl"
@@ -132,8 +134,10 @@ export default function UserReports() {
                 fontWeight="700"
               >
                 Recently Added
-              </Text>
+              </Text> */}
               <TotalSpent />
+              <Crypto mt="20px" />
+              <Wallet mt="20px" />
             </SimpleGrid>
             <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px">
               {/* <Tasks />

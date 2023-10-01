@@ -64,7 +64,7 @@ export default function Settings() {
           change:
             parseFloat(rawData.price_change_percentage_24h).toFixed(2) + "%",
           marketCap: "$ " + rawData.market_cap.toLocaleString(),
-          price: "$ " + parseFloat(rawData.current_price).toFixed(2),
+          price: "$ " + parseFloat(rawData.current_price).toLocaleString(),
           id: rawData.id,
           image: rawData.image,
         }));

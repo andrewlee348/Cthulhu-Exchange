@@ -32,7 +32,7 @@ export default function ColumnsTable(props) {
   };
   const handleRowMouseLeave = () => {
     setHoveredRow(null);
-  }
+  };
 
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
@@ -61,35 +61,39 @@ export default function ColumnsTable(props) {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   return (
     <Card
-      direction='column'
-      w='100%'
-      px='0px'
-      overflowX={{ sm: "scroll", lg: "hidden" }}>
-      <Flex px='25px' justify='space-between' mb='20px' align='center'>
+      direction="column"
+      w="100%"
+      px="0px"
+      overflowX={{ sm: "scroll", lg: "hidden" }}
+    >
+      <Flex px="25px" justify="space-between" mb="20px" align="center">
         <Text
           color={textColor}
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'>
+          fontSize="22px"
+          fontWeight="700"
+          lineHeight="100%"
+        >
           Cryptocurrencies
         </Text>
         <Menu />
       </Flex>
-      <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
+      <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
           {headerGroups.map((headerGroup, index) => (
             <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
               {headerGroup.headers.map((column, index) => (
                 <Th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
-                  pe='10px'
+                  pe="10px"
                   key={index}
-                  borderColor={borderColor}>
+                  borderColor={borderColor}
+                >
                   <Flex
-                    justify='space-between'
-                    align='center'
+                    justify="space-between"
+                    align="center"
                     fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
+                    color="gray.400"
+                  >
                     {column.render("Header")}
                   </Flex>
                 </Th>
@@ -101,50 +105,80 @@ export default function ColumnsTable(props) {
           {page.map((row, index) => {
             prepareRow(row);
             return (
-              < Tr {...row.getRowProps()} key={index} onClick={() => history.push("/admin/coin/" + row.original.id)}
+              <Tr
+                {...row.getRowProps()}
+                key={index}
+                onClick={() => history.push("/admin/coin/" + row.original.id)}
                 onMouseEnter={() => handleRowHover(index)}
                 onMouseLeave={handleRowMouseLeave}
                 style={{
-                  backgroundColor: hoveredRow === index ? "#FFF5C8" : "transparent", cursor: "pointer"
-                }}>
+                  backgroundColor:
+                    hoveredRow === index ? "#FFF5C8" : "transparent",
+                  cursor: "pointer",
+                }}
+              >
                 {row.cells.map((cell, index) => {
                   let data = "";
                   if (cell.column.Header === "Asset") {
                     data = (
-                      <Flex align='center'>
+                      <Flex align="center">
                         <img
                           src={row.original.image}
                           alt={row.original.id}
                           style={{ width: "40px", height: "40px" }}
                         />
-                        <Text color={textColor} fontSize='sm' fontWeight='700' ml="13px">
-                          {cell.value}
-                        </Text>
+                        <row>
+                          <Text
+                            color={textColor}
+                            fontSize="sm"
+                            fontWeight="700"
+                            ml="13px"
+                          >
+                            {row.original.id.replaceAll("-", " ").toUpperCase()}
+                            {/* {cell.value} */}
+                          </Text>
+                          <Text
+                            color={"rgb(150, 150, 150)"}
+                            fontSize="sm"
+                            fontWeight="500"
+                            ml="13px"
+                          >
+                            {/* {row.original.id.replaceAll("-", " ").toUpperCase()} */}
+                            {cell.value}
+                          </Text>
+                        </row>
                       </Flex>
                     );
                   } else if (cell.column.Header === "Price") {
                     data = (
-                      <Flex align='center'>
+                      <Flex align="center">
                         <Text
-                          me='10px'
+                          me="10px"
                           color={textColor}
-                          fontSize='sm'
-                          fontWeight='700'>
+                          fontSize="sm"
+                          fontWeight="700"
+                        >
                           {cell.value}
                         </Text>
                       </Flex>
                     );
                   } else if (cell.column.Header === "Change (24h)") {
                     data = (
-                      <Text color={parseFloat(cell.value) >= 0 ? "#008000" : "#d33854"} fontSize='sm' fontWeight='700' >
+                      <Text
+                        color={
+                          parseFloat(cell.value) >= 0 ? "#008000" : "#d33854"
+                        }
+                        fontSize="sm"
+                        fontWeight="700"
+                      >
                         {parseFloat(cell.value) >= 0 ? "▲" : "▼"}
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        {Math.abs(parseFloat(cell.value))}
+                        {Math.abs(parseFloat(cell.value))}%
                       </Text>
                     );
                   } else if (cell.column.Header === "Market cap") {
                     data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
+                      <Text color={textColor} fontSize="sm" fontWeight="700">
                         {cell.value}
                       </Text>
                     );
@@ -155,7 +189,8 @@ export default function ColumnsTable(props) {
                       key={index}
                       fontSize={{ sm: "14px" }}
                       minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                      borderColor='transparent'>
+                      borderColor="transparent"
+                    >
                       {data}
                     </Td>
                   );
@@ -165,6 +200,6 @@ export default function ColumnsTable(props) {
           })}
         </Tbody>
       </Table>
-    </Card >
+    </Card>
   );
 }

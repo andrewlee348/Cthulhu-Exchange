@@ -66,17 +66,6 @@ export default function ColumnsTable(props) {
       px="0px"
       overflowX={{ sm: "scroll", lg: "hidden" }}
     >
-      <Flex px="25px" justify="space-between" mb="20px" align="center">
-        <Text
-          color={textColor}
-          fontSize="22px"
-          fontWeight="700"
-          lineHeight="100%"
-        >
-          Cryptocurrencies
-        </Text>
-        <Menu />
-      </Flex>
       <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
           {headerGroups.map((headerGroup, index) => (
@@ -154,11 +143,11 @@ export default function ColumnsTable(props) {
                       <Flex align="center">
                         <Text
                           me="10px"
-                          color={textColor}
-                          fontSize="sm"
-                          fontWeight="700"
+                          color={"rgb(130,130,130)"}
+                          fontSize="16px"
+                          fontWeight="500"
                         >
-                          {cell.value}
+                          $ {cell.value.toFixed(2).toLocaleString()}
                         </Text>
                       </Flex>
                     );
@@ -176,11 +165,28 @@ export default function ColumnsTable(props) {
                         {Math.abs(parseFloat(cell.value))}%
                       </Text>
                     );
-                  } else if (cell.column.Header === "Market cap") {
+                  } else if (cell.column.Header === "Balance") {
                     data = (
-                      <Text color={textColor} fontSize="sm" fontWeight="700">
-                        {cell.value}
-                      </Text>
+                      <row>
+                        <Text
+                          color={textColor}
+                          fontSize="16px"
+                          fontWeight="450"
+                        >
+                          ${" "}
+                          {row.original.balance_cash
+                            .toFixed(2)
+                            .toLocaleString()}
+                        </Text>
+                        <Text
+                          color={"rgb(130,130,130)"}
+                          fontSize="sm"
+                          fontWeight="500"
+                        >
+                          {cell.value.toFixed(5).toLocaleString()}{" "}
+                          {row.original.asset.toUpperCase()}
+                        </Text>
+                      </row>
                     );
                   }
                   return (

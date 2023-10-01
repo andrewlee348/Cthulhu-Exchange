@@ -42,7 +42,7 @@ const testOptions = {
   },
 
   annotations: {
-    
+
     yaxis: [{
       y: 30,
       borderColor: '#999',
@@ -121,13 +121,24 @@ const testOptions = {
     tickAmount: 6
   },
   tooltip: {
+    fillSeriesColor: false,
+    marker: {
+      show: false
+    },
+
     x: {
+      show: true,
       format: 'dd MMM yyyy'
     },
     shared: false,
     y: {
+      title: {
+        formatter: function (val) {
+          return
+        }
+      },
       formatter: function (val) {
-        return val
+        return '$' + val.toFixed(2)
         //  (val / 1000000).toFixed(0)
       }
     }
@@ -264,7 +275,7 @@ export default function TotalSpent({ coinData, graphData, ...rest }) {
       {...rest}>
       <Flex justify='space-between' ps='0px' pe='20px' pt='5px'>
         <Flex align='center' w='100%'>
-          <Button
+          {/* <Button
             bg={boxBg}
             fontSize='sm'
             fontWeight='500'
@@ -276,8 +287,8 @@ export default function TotalSpent({ coinData, graphData, ...rest }) {
               me='4px'
             />
             This month
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             ms='auto'
             align='center'
             justifyContent='center'
@@ -291,44 +302,47 @@ export default function TotalSpent({ coinData, graphData, ...rest }) {
             borderRadius='10px'
             {...rest}>
             <Icon as={MdBarChart} color={iconColor} w='24px' h='24px' />
-          </Button>
+          </Button> */}
+
         </Flex>
       </Flex>
       <Flex w='100%' flexDirection={{ base: "column", lg: "row" }}>
         <Flex flexDirection='column' me='20px' mt='28px'>
-          <Text
-            color={textColor}
-            fontSize='34px'
-            textAlign='start'
-            fontWeight='700'
-            lineHeight='100%'>
-            {coinData.market_data.current_price.usd}
-          </Text>
-          <Flex align='center' mb='20px'>
-            <Text
-              color='secondaryGray.600'
-              fontSize='sm'
-              fontWeight='500'
-              mt='4px'
-              me='12px'>
-              Total Spent
-            </Text>
-            <Flex align='center'>
-              <Icon as={RiArrowUpSFill} color='green.500' me='2px' mt='2px' />
-              <Text color='green.500' fontSize='sm' fontWeight='700'>
-                +2.45%
-              </Text>
-            </Flex>
-          </Flex>
 
-          <Flex align='center'>
+          {/* <Flex align='center'>
             <Icon as={IoCheckmarkCircle} color='green.500' me='4px' />
             <Text color='green.500' fontSize='md' fontWeight='700'>
               On track
             </Text>
-          </Flex>
+          </Flex> */}
         </Flex>
         <Box minH='260px' minW='75%' mt='auto'>
+          <Flex align='center' alignItems='center' w='100%'>
+            <Text
+              color={textColor}
+              fontSize='34px'
+              textAlign='start'
+              fontWeight='700'
+              lineHeight='100%'>
+              {coinData.market_data.current_price.usd}
+            </Text>
+              <Flex align='center' alignItems='center'>
+                {/* <Icon as={RiArrowUpSFill} color='green.500' me='2px' mt='2px' /> */}
+                <Text color='green.500' fontSize='sm' fontWeight='700'>
+                  +2.45%
+                </Text>
+              </Flex>
+            <Flex align='center' alignItems='center' mb='20px'>
+              <Text
+                color='secondaryGray.600'
+                fontSize='sm'
+                fontWeight='500'
+                mt='4px'
+                me='12px'>
+
+              </Text>
+            </Flex>
+          </Flex>
           <LineChart
             chartData={graphData}
             // chartOptions={{

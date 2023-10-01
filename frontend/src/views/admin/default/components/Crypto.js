@@ -144,6 +144,18 @@ export default function TotalSpent(props) {
         >
           Sell
         </Button>
+        <Button
+          variant="darkBrand"
+          color="white"
+          fontSize="sm"
+          fontWeight="500"
+          borderRadius="70px"
+          px="16px"
+          py="5px"
+          ml="10px"
+        >
+          Convert
+        </Button>
       </Flex>
     </Card>
   );

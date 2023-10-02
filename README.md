@@ -1,3 +1,2 @@
-# paper-trading
-A paper trading web app for Crypto-currencies
-yee
+# Cthulu Exchange
+A paper trading exchange web-app for Cryptocurrencies

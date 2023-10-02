@@ -60,11 +60,11 @@ export default function Settings() {
       try {
         const response = await axios.get(`${API_BASE_URL}/get_allcrypto`);
         const formattedData = response.data.map((rawData) => ({
-          asset: rawData.symbol.toUpperCase(),
+          asset: rawData.symbol,
           change:
             parseFloat(rawData.price_change_percentage_24h).toFixed(2) + "%",
           marketCap: "$ " + rawData.market_cap.toLocaleString(),
-          price: "$ " + parseFloat(rawData.current_price).toFixed(2),
+          price: "$ " + parseFloat(rawData.current_price).toLocaleString(),
           id: rawData.id,
           image: rawData.image,
         }));

@@ -277,14 +277,15 @@ export default function TotalSpent({ coinData, graphData, ...rest }) {
         <Flex align='center' w='100%'>
           {/* <Button
             bg={boxBg}
-            fontSize='sm'
-            fontWeight='500'
+            fontSize="sm"
+            fontWeight="500"
             color={textColorSecondary}
-            borderRadius='7px'>
+            borderRadius="7px"
+          >
             <Icon
               as={MdOutlineCalendarToday}
               color={textColorSecondary}
-              me='4px'
+              me="4px"
             />
             This month
           </Button> */}

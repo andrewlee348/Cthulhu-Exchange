@@ -127,7 +127,7 @@ export default function ColumnsTable(props) {
                           alt={row.original.id}
                           style={{ width: "40px", height: "40px" }}
                         />
-                        <row>
+                        <Flex flexDirection="column">
                           <Text
                             color={textColor}
                             fontSize="sm"
@@ -146,7 +146,7 @@ export default function ColumnsTable(props) {
                             {/* {row.original.id.replaceAll("-", " ").toUpperCase()} */}
                             {cell.value.toUpperCase()}
                           </Text>
-                        </row>
+                        </Flex>
                       </Flex>
                     );
                   } else if (cell.column.Header === "Price") {

@@ -44,6 +44,7 @@ export default function Marketplace() {
 
   const [coinData, setCoinData] = useState(null);
   const [graphData, setGraphData] = useState(null);
+  const [graphInterval, setGraphInterval] = useState("day");
   const [image, setImage] = useState("");
   const [graphPoints, setGraphPoints] = useState([]);
   useEffect(() => {
@@ -52,6 +53,8 @@ export default function Marketplace() {
         const response = await axios.get(`${API_BASE_URL}/coins/${coinName}`);
         setCoinData(response.data[0]);
         setGraphData(response.data[1]);
+        console.log("api data", response.data);
+
         // setGraphPoints(graphData.map((p) => p[0]));
         // console.log("graph data: ", response.data);
       } catch (error) {
@@ -127,19 +130,16 @@ export default function Marketplace() {
                   align={{ base: "start", md: "center" }}
                 ></Flex> */}
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="20px">
-                  <Chart
-                    coinData={coinData}
-                    graphData={graphData}
-                  />
+                  <Chart coinData={coinData} gD={graphData} />
                 </SimpleGrid>
                 <SimpleGrid
                   columns={{ base: 1, md: 1 }}
                   gap="20px"
                   mb={{ base: "20px", xl: "0px" }}
                 >
-                <Card title={`About ${coinData.name}`}>
-                  {coinData.description["en"]}
-                </Card>
+                  <Card title={`About ${coinData.name}`}>
+                    {coinData.description["en"]}
+                  </Card>
                 </SimpleGrid>
               </Flex>
             </Flex>

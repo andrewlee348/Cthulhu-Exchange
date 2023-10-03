@@ -36,18 +36,31 @@ def get_allcrypto():
 def get_coin_details(id):
     try:
         pageData = cg.get_coin_by_id(id)
-        graphData = cg.get_coin_market_chart_by_id(id, 'usd', 30)
-        pointsData = [{
-            'data': list(map(lambda x: x, graphData["prices"][:-1])),
-            'name': "bitcoin"
+        graphDataDay = cg.get_coin_market_chart_by_id(id, 'usd', 1)
+        graphDataWeek = cg.get_coin_market_chart_by_id(id, 'usd', 7)
+        graphDataMonth = cg.get_coin_market_chart_by_id(id, 'usd', 30, interval='daily')
+        graphDataQuarter = cg.get_coin_market_chart_by_id(id, 'usd', 90, interval='daily')
+        graphDataHalf = cg.get_coin_market_chart_by_id(id, 'usd', 180, interval='daily')
+        graphDataYear = cg.get_coin_market_chart_by_id(id, 'usd', 365, interval='daily')
+        pointsDataDay = [{
+            'data': list(map(lambda x: x, graphDataDay["prices"][:-1:3])),
         }]
-        # pointsData = [
-        # {
-        #     'name': "Revenue",
-        #     'data': [55, 64, 48, 66, 49, 68, 50],
-        # }
-        # ]
-        return [pageData, pointsData], 200
+        pointsDataWeek = [{
+            'data': list(map(lambda x: x, graphDataWeek["prices"][:-1:4])),
+        }]
+        pointsDataMonth = [{
+            'data': list(map(lambda x: x, graphDataMonth["prices"][:-1])),
+        }]
+        graphDataQuarter = [{
+            'data': list(map(lambda x: x, graphDataQuarter["prices"][:-1])),
+        }]
+        graphDataHalf = [{
+            'data': list(map(lambda x: x, graphDataHalf["prices"][:-1])),
+        }]
+        graphDataYear = [{
+            'data': list(map(lambda x: x, graphDataYear["prices"][:-1])),
+        }]
+        return [pageData, [pointsDataDay, pointsDataWeek, pointsDataMonth, graphDataQuarter, graphDataHalf, graphDataYear]], 200
     except Exception as e:
         return {'error': str(e)}, 500
 

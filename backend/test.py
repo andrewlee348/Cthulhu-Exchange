@@ -42,24 +42,30 @@ def get_coin_details(id):
         graphDataQuarter = cg.get_coin_market_chart_by_id(id, 'usd', 90, interval='daily')
         graphDataHalf = cg.get_coin_market_chart_by_id(id, 'usd', 180, interval='daily')
         graphDataYear = cg.get_coin_market_chart_by_id(id, 'usd', 365, interval='daily')
-        pointsDataDay = [{
+        pointsDataDay = {
+            'name': 'dailyData',
             'data': list(map(lambda x: x, graphDataDay["prices"][:-1:3])),
-        }]
-        pointsDataWeek = [{
+        }
+        pointsDataWeek = {
+            'name': 'weeklyData',
             'data': list(map(lambda x: x, graphDataWeek["prices"][:-1:4])),
-        }]
-        pointsDataMonth = [{
+        }
+        pointsDataMonth = {
+            'name': 'monthlyData',
             'data': list(map(lambda x: x, graphDataMonth["prices"][:-1])),
-        }]
-        graphDataQuarter = [{
+        }
+        graphDataQuarter = {
+            'name': 'quarterlyData',
             'data': list(map(lambda x: x, graphDataQuarter["prices"][:-1])),
-        }]
-        graphDataHalf = [{
+        }
+        graphDataHalf = {
+            'name': 'halfData',
             'data': list(map(lambda x: x, graphDataHalf["prices"][:-1])),
-        }]
-        graphDataYear = [{
+        }
+        graphDataYear = {
+            'name': 'yearlyData',
             'data': list(map(lambda x: x, graphDataYear["prices"][:-1])),
-        }]
+        }
         return [pageData, [pointsDataDay, pointsDataWeek, pointsDataMonth, graphDataQuarter, graphDataHalf, graphDataYear]], 200
     except Exception as e:
         return {'error': str(e)}, 500

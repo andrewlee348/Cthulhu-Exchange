@@ -172,26 +172,30 @@ export default function Chart({ coinData, gD, ...rest }) {
     if (gD) {
       setGraphData(gD[2]);
       console.log("YEET", gD[2]);
-      chartRef.current.updateData(gD[2]);
+      chartRef.current.updateData(gD[2][0]);
     }
   }, [gD]);
 
   const handleGraphInterval = (graphInterval) => {
+    let chartIndex = 0;
     if (graphInterval === "day") {
-      setGraphData(gD[0]);
+      chartIndex = 0;
     } else if (graphInterval === "week") {
-      setGraphData(gD[1]);
+      chartIndex = 1;
     } else if (graphInterval === "month") {
-      setGraphData(gD[2]);
+      chartIndex = 2;
     } else if (graphInterval === "quarter") {
-      setGraphData(gD[3]);
+      chartIndex = 3;
     } else if (graphInterval === "half") {
-      setGraphData(gD[4]);
+      chartIndex = 4;
     } else if (graphInterval === "year") {
-      setGraphData(gD[5]);
+      chartIndex = 5;
     }
+    setGraphData(gD[chartIndex]);
     // console.log("penis", chartRef.current);
-    chartRef.current.updateData(gD[2]);
+    if (gD && graphData) {
+      chartRef.current.updateData(gD[chartIndex]);
+    }
   };
 
   return gD ? (

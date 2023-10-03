@@ -20,9 +20,10 @@ class LineChart extends React.Component {
   }
 
   updateData(newData) {
-    console.log("poop", newData[0]);
-
-    this.chartRef.current.chart.updateSeries(newData[0]);
+    console.log("poop", newData);
+    if (newData) {
+      this.chartRef.current.chart.updateSeries(newData);
+    }
   }
 
   // componentDidUpdate() {
@@ -62,7 +63,7 @@ class LineChart extends React.Component {
     });
     switch (timeline) {
       case "ytd":
-        console.log(this.chartRef.current.chart);
+        console.log("mr", this.chartRef.current.chart);
         // this.chartRef.current.chart.exec(
         //   'area-datetime',
         //   'zoomX',

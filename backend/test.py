@@ -17,7 +17,7 @@ def hello():
 
 
 @app.route('/get_allcrypto')
-@cache.cached(timeout=600)
+@cache.cached(timeout=60)
 def get_allcrypto():
     try:
         data = cg.get_coins_markets(vs_currency='usd')

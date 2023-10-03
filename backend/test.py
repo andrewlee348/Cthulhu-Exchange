@@ -19,8 +19,13 @@ def hello():
 @app.route('/get_allcrypto')
 @cache.cached(timeout=60)
 def get_allcrypto():
+    cached_data = cache.get('data')  # Attempt to fetch data from cache
+    if cached_data is not None:
+        return jsonify(cached_data)  # Return cached data if available
+
     try:
-        data = cg.get_coins_markets(vs_currency='usd')
+        data = cg.get_coins_markets(vs_currency='usd')[:10]
+        cache.set('data', data)  # Store the API response in the cache
         return data, 200
 
     except Exception as e:
@@ -32,7 +37,17 @@ def get_coin_details(id):
     try:
         pageData = cg.get_coin_by_id(id)
         graphData = cg.get_coin_market_chart_by_id(id, 'usd', 30)
-        return [pageData, graphData], 200
+        pointsData = [{
+            'data': list(map(lambda x: x, graphData["prices"][:30])),
+            'name': "bitcoin"
+        }]
+        # pointsData = [
+        # {
+        #     'name': "Revenue",
+        #     'data': [55, 64, 48, 66, 49, 68, 50],
+        # }
+        # ]
+        return [pageData, pointsData], 200
     except Exception as e:
         return {'error': str(e)}, 500
 

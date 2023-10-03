@@ -17,7 +17,7 @@ def hello():
 
 
 @app.route('/get_allcrypto')
-@cache.cached(timeout=600)
+@cache.cached(timeout=60)
 def get_allcrypto():
     cached_data = cache.get('data')  # Attempt to fetch data from cache
     if cached_data is not None:

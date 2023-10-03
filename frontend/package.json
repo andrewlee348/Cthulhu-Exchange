@@ -1,6 +1,6 @@
 {
-  "homepage": "https://horizon-ui.com/horizon-ui-chakra",
-  "name": "horizon-ui-chakra",
+  "homepage": "https://henryzhang0.github.io/cthulu",
+  "name": "Cthulu Exchange",
   "version": "1.0.1",
   "private": true,
   "dependencies": {
@@ -44,7 +44,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "sitemap": "babel-node ./sitemap-builder.js"
+    "sitemap": "babel-node ./sitemap-builder.js",
+    "postdeploy": "rm -rf build"
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"

@@ -135,7 +135,7 @@ export default function UserReports() {
               >
                 Recently Added
               </Text> */}
-              <TotalSpent />
+              <TotalSpent caption="Current Balance"/>
               <Crypto mt="20px" />
               <Wallet mt="20px" />
             </SimpleGrid>

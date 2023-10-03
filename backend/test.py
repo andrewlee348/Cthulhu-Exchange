@@ -38,7 +38,7 @@ def get_coin_details(id):
         pageData = cg.get_coin_by_id(id)
         graphData = cg.get_coin_market_chart_by_id(id, 'usd', 30)
         pointsData = [{
-            'data': list(map(lambda x: x, graphData["prices"][:30])),
+            'data': list(map(lambda x: x, graphData["prices"][:-1])),
             'name': "bitcoin"
         }]
         # pointsData = [

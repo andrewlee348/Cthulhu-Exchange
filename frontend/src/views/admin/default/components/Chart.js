@@ -125,7 +125,7 @@ const testOptions = {
         return `${day} ${month} ${year}`;
       },
     },
-    tickAmount: 6,
+    tickAmount: 4,
   },
   tooltip: {
     enabled: true,

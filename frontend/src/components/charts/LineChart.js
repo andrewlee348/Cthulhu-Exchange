@@ -14,23 +14,26 @@ class LineChart extends React.Component {
 
   componentDidMount() {
     this.setState({
-      chartData: this.props.chartData,
+      graphData: this.props.chartData,
+      chartData: [this.props.chartData[0]],
       chartOptions: this.props.chartOptions,
     });
+    console.log("linechart data: ", this.props.chartData);
   }
 
-  updateData(newData) {
-    console.log("poop", newData);
-    if (newData) {
-      this.chartRef.current.chart.updateSeries(newData);
-    }
+  updateData(index) {
+    this.chartRef.current.chart.updateSeries([this.state.graphData[index]]);
+    // this.chartRef.current.chart.toggleSeries(newData);
   }
 
-  // componentDidUpdate() {
-  //   this.chartRef.current.chart.updateSeries({
-  //     series: this.props.chartData,
-  //   });
-  // }
+  componentDidUpdate() {
+    // this.chartRef.current.chart.updateSeries({
+    //   series: [
+    //     [10, 20],
+    //     [30, 50],
+    //   ],
+    // });
+  }
 
   changeDateFormat(dateFormat) {
     this.chartRef.current.chart.updateOptions({
@@ -44,7 +47,7 @@ class LineChart extends React.Component {
             const month = date.toLocaleString("en-us", { month: "short" });
             const year = date.getFullYear();
 
-            console.log("Data:" + dateFormat);
+            // console.log("Data:" + dateFormat);
 
             if (dateFormat === "day") {
               return `${day} ${month} ${year} ${hour}:${minute}`;
@@ -84,13 +87,17 @@ class LineChart extends React.Component {
       <>
         <button
           id="ytd"
-          onClick={() => this.changeDateFormat("day")}
+          onClick={() => {
+            // this.changeDateFormat("day");
+            this.updateData(4);
+          }}
           className={this.state.selection === "ytd" ? "active" : ""}
         >
           YTD
         </button>
         <ReactApexChart
           options={this.state.chartOptions}
+          // series={this.state.chartData}
           series={this.state.chartData}
           type="area"
           width="100%"

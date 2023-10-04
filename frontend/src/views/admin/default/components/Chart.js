@@ -170,35 +170,37 @@ export default function Chart({ coinData, gD, ...rest }) {
 
   useEffect(() => {
     if (gD) {
-      setGraphData(gD[2]);
-      console.log("YEET", gD[2]);
-      chartRef.current.updateData(gD[2][0]);
+      setGraphData(gD);
+      console.log("Chart GD:", gD);
+      //   chartRef.current.updateData(gD[2]);
     }
   }, [gD]);
 
   const handleGraphInterval = (graphInterval) => {
-    let chartIndex = 0;
-    if (graphInterval === "day") {
-      chartIndex = 0;
-    } else if (graphInterval === "week") {
-      chartIndex = 1;
-    } else if (graphInterval === "month") {
-      chartIndex = 2;
-    } else if (graphInterval === "quarter") {
-      chartIndex = 3;
-    } else if (graphInterval === "half") {
-      chartIndex = 4;
-    } else if (graphInterval === "year") {
-      chartIndex = 5;
-    }
-    setGraphData(gD[chartIndex]);
+    // let chartIndex = 0;
+    // if (graphInterval === "day") {
+    //   chartIndex = 0;
+    // } else if (graphInterval === "week") {
+    //   chartIndex = 1;
+    // } else if (graphInterval === "month") {
+    //   chartIndex = 2;
+    // } else if (graphInterval === "quarter") {
+    //   chartIndex = 3;
+    // } else if (graphInterval === "half") {
+    //   chartIndex = 4;
+    // } else if (graphInterval === "year") {
+    //   chartIndex = 5;
+    // }
+    console.log("hey", gD);
+    setGraphData(gD);
     // console.log("penis", chartRef.current);
-    if (gD && graphData) {
-      chartRef.current.updateData(gD[chartIndex]);
-    }
+    // if (gD && graphData) {
+    // chartRef.current.updateData(gD[chartIndex]);
+    //   console.log(gD[chartIndex]);
+    // }
   };
 
-  return gD ? (
+  return graphData ? (
     <Card
       justifyContent="center"
       align="center"

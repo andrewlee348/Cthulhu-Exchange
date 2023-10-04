@@ -43,28 +43,28 @@ def get_coin_details(id):
         graphDataHalf = cg.get_coin_market_chart_by_id(id, 'usd', 180, interval='daily')
         graphDataYear = cg.get_coin_market_chart_by_id(id, 'usd', 365, interval='daily')
         pointsDataDay = {
-            'name': 'dailyData',
             'data': list(map(lambda x: x, graphDataDay["prices"][:-1:3])),
+            'name': 'dailyData',
         }
         pointsDataWeek = {
-            'name': 'weeklyData',
             'data': list(map(lambda x: x, graphDataWeek["prices"][:-1:4])),
+            'name': 'weeklyData',
         }
         pointsDataMonth = {
-            'name': 'monthlyData',
             'data': list(map(lambda x: x, graphDataMonth["prices"][:-1])),
+            'name': 'monthlyData',
         }
         graphDataQuarter = {
-            'name': 'quarterlyData',
             'data': list(map(lambda x: x, graphDataQuarter["prices"][:-1])),
+            'name': 'quarterlyData',
         }
         graphDataHalf = {
-            'name': 'halfData',
             'data': list(map(lambda x: x, graphDataHalf["prices"][:-1])),
+            'name': 'halfData',
         }
         graphDataYear = {
-            'name': 'yearlyData',
             'data': list(map(lambda x: x, graphDataYear["prices"][:-1])),
+            'name': 'yearlyData',
         }
         return [pageData, [pointsDataDay, pointsDataWeek, pointsDataMonth, graphDataQuarter, graphDataHalf, graphDataYear]], 200
     except Exception as e:

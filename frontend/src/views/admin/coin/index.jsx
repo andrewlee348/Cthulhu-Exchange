@@ -53,7 +53,7 @@ export default function Marketplace() {
         const response = await axios.get(`${API_BASE_URL}/coins/${coinName}`);
         setCoinData(response.data[0]);
         setGraphData(response.data[1]);
-        console.log("api data", response.data[1]);
+        console.log("api data", response.data);
 
         // setGraphPoints(graphData.map((p) => p[0]));
         // console.log("graph data: ", response.data);

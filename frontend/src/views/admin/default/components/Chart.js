@@ -34,6 +34,7 @@ const testOptions = {
       autoScaleYaxis: true,
     },
     toolbar: {
+      show: false,
       autoSelected: "zoom",
     },
   },

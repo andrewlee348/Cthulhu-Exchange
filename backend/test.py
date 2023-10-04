@@ -38,32 +38,29 @@ def get_coin_details(id):
         pageData = cg.get_coin_by_id(id)
         graphDataDay = cg.get_coin_market_chart_by_id(id, 'usd', 1)
         graphDataWeek = cg.get_coin_market_chart_by_id(id, 'usd', 7)
-        graphDataMonth = cg.get_coin_market_chart_by_id(id, 'usd', 30, interval='daily')
-        graphDataQuarter = cg.get_coin_market_chart_by_id(id, 'usd', 90, interval='daily')
-        graphDataHalf = cg.get_coin_market_chart_by_id(id, 'usd', 180, interval='daily')
-        graphDataYear = cg.get_coin_market_chart_by_id(id, 'usd', 365, interval='daily')
+        graphDataYear = cg.get_coin_market_chart_by_id(id, 'usd', 365)
         pointsDataDay = {
-            'data': list(map(lambda x: x, graphDataDay["prices"][:-1:3])),
+            'data': list(map(lambda x: x, graphDataDay["prices"][::3])),
             'name': 'dailyData',
         }
         pointsDataWeek = {
-            'data': list(map(lambda x: x, graphDataWeek["prices"][:-1:4])),
+            'data': list(map(lambda x: x, graphDataWeek["prices"][::4])),
             'name': 'weeklyData',
         }
         pointsDataMonth = {
-            'data': list(map(lambda x: x, graphDataMonth["prices"][:-1])),
+            'data': list(map(lambda x: x, graphDataYear["prices"][-30:])),
             'name': 'monthlyData',
         }
         graphDataQuarter = {
-            'data': list(map(lambda x: x, graphDataQuarter["prices"][:-1])),
+            'data': list(map(lambda x: x, graphDataYear["prices"][-90:])),
             'name': 'quarterlyData',
         }
         graphDataHalf = {
-            'data': list(map(lambda x: x, graphDataHalf["prices"][:-1])),
+            'data': list(map(lambda x: x, graphDataYear["prices"][-180:])),
             'name': 'halfData',
         }
         graphDataYear = {
-            'data': list(map(lambda x: x, graphDataYear["prices"][:-1])),
+            'data': list(map(lambda x: x, graphDataYear["prices"])),
             'name': 'yearlyData',
         }
         return [pageData, [pointsDataDay, pointsDataWeek, pointsDataMonth, graphDataQuarter, graphDataHalf, graphDataYear]], 200

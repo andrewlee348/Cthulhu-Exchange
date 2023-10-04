@@ -44,7 +44,7 @@ export default function Marketplace() {
 
   const [coinData, setCoinData] = useState(null);
   const [graphData, setGraphData] = useState(null);
-  const [graphInterval, setGraphInterval] = useState("day");
+  const [graphInterval, setGraphInterval] = useState("week");
   const [image, setImage] = useState("");
   const [graphPoints, setGraphPoints] = useState([]);
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function Marketplace() {
                   align={{ base: "start", md: "center" }}
                 ></Flex> */}
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="20px">
-                  <Chart coinData={coinData} gD={graphData} />
+                  <Chart coinData={coinData} gD={graphData} title="Price" />
                 </SimpleGrid>
                 <SimpleGrid
                   columns={{ base: 1, md: 1 }}

@@ -15,15 +15,26 @@ class LineChart extends React.Component {
   componentDidMount() {
     this.setState({
       graphData: this.props.chartData,
-      chartData: [this.props.chartData[0]],
+      chartData: [this.props.chartData[1]],
       chartOptions: this.props.chartOptions,
     });
     console.log("linechart data: ", this.props.chartData);
   }
 
-  updateData(index) {
-    this.chartRef.current.chart.updateSeries([this.state.graphData[index]]);
-    // this.chartRef.current.chart.toggleSeries(newData);
+  updateData(graphInterval) {
+    if (graphInterval == "day") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[0]]);
+    } else if (graphInterval == "week") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[1]]);
+    } else if (graphInterval == "month") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[2]]);
+    } else if (graphInterval == "quarter") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[3]]);
+    } else if (graphInterval == "half") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[4]]);
+    } else if (graphInterval == "year") {
+      this.chartRef.current.chart.updateSeries([this.state.graphData[5]]);
+    }
   }
 
   componentDidUpdate() {
@@ -49,7 +60,7 @@ class LineChart extends React.Component {
 
             // console.log("Data:" + dateFormat);
 
-            if (dateFormat === "day") {
+            if (dateFormat === "week") {
               return `${day} ${month} ${year} ${hour}:${minute}`;
             } else {
               return `${day} ${month} ${year} ${hour}`;
@@ -85,16 +96,6 @@ class LineChart extends React.Component {
   render() {
     return (
       <>
-        <button
-          id="ytd"
-          onClick={() => {
-            // this.changeDateFormat("day");
-            this.updateData(4);
-          }}
-          className={this.state.selection === "ytd" ? "active" : ""}
-        >
-          YTD
-        </button>
         <ReactApexChart
           options={this.state.chartOptions}
           // series={this.state.chartData}

@@ -64,6 +64,21 @@ export default function Marketplace() {
     fetchData();
   }, []);
 
+  const renderDescriptionWithLinks = () => {
+    // Check if coinData and description exist
+    if (coinData && coinData.description && coinData.description["en"]) {
+      // Use dangerouslySetInnerHTML to render HTML content
+      return (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: coinData.description["en"],
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   return (
@@ -82,23 +97,22 @@ export default function Marketplace() {
               gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
             >
               <Flex
-                mt="45px"
+                mt="10px"
                 mb="20px"
-                justifyContent="space-between"
+                justifyContent="flex-start"
                 direction={{ base: "column", md: "row" }}
                 align={{ base: "start", md: "center" }}
               >
                 <img
                   src={coinData.image.large}
                   alt="Logo"
-                  width="50px"
-                  height="50px"
+                  width="70px"
+                  height="70px"
                 />
                 <Flex
-                  mt="45px"
-                  mb="20px"
                   justifyContent="space-between"
                   flexDirection="column"
+                  alignItems="flex-start"
                   direction={{ base: "column", md: "row" }}
                   align={{ base: "start", md: "center" }}
                 >
@@ -116,29 +130,23 @@ export default function Marketplace() {
                     ms="24px"
                     fontWeight="700"
                   >
-                    {coinData.symbol}
+                    {coinData.symbol.toUpperCase()}
                   </Text>
                 </Flex>
               </Flex>
 
               <Flex direction="column">
-                {/* <Flex
-                  mt="45px"
-                  mb="20px"
-                  justifyContent="space-between"
-                  direction={{ base: "column", md: "row" }}
-                  align={{ base: "start", md: "center" }}
-                ></Flex> */}
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="20px">
                   <Chart coinData={coinData} gD={graphData} title="Price" />
                 </SimpleGrid>
                 <SimpleGrid
                   columns={{ base: 1, md: 1 }}
                   gap="20px"
+                  mt="20px"
                   mb={{ base: "20px", xl: "0px" }}
                 >
                   <Card title={`About ${coinData.name}`}>
-                    {coinData.description["en"]}
+                    {renderDescriptionWithLinks()}
                   </Card>
                 </SimpleGrid>
               </Flex>

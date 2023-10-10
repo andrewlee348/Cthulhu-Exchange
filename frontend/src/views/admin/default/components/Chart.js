@@ -197,24 +197,18 @@ export default function Chart({ coinData, gD, title, ...rest }) {
       align="center"
       direction="column"
       w="100%"
-      mb="0px"
       {...rest}
     >
-      <Flex justify="space-between" ps="0px" pe="20px" pt="5px">
+      <Flex justify="space-between">
         <Flex align="center" w="100%">
           <Flex
             flexDirection="column"
-            ml="10px"
-            me="20px"
             alignItems="flex-start"
+            mt="-10px"
+            ml="6px"
+            mb="20px"
           >
-            <Text
-              color="secondaryGray.600"
-              fontSize="sm"
-              fontWeight="500"
-              mt="4px"
-              me="12px"
-            >
+            <Text color="secondaryGray.600" fontSize="sm" fontWeight="500">
               {title}
             </Text>
             <Flex flexDirection="row" justifyContent="flex-start">
@@ -227,19 +221,14 @@ export default function Chart({ coinData, gD, title, ...rest }) {
               >
                 {coinData.market_data.current_price["usd"]}
               </Text>
-              <Flex align="center" mb="20px">
+              {/* <Flex align="center">
                 <Flex align="center">
-                  <Icon
-                    as={RiArrowUpSFill}
-                    color="green.500"
-                    me="2px"
-                    mt="2px"
-                  />
+                  <Icon as={RiArrowUpSFill} color="green.500" />
                   <Text color="green.500" fontSize="sm" fontWeight="700">
                     +2.45%
                   </Text>
                 </Flex>
-              </Flex>
+              </Flex> */}
             </Flex>
           </Flex>
           {/* <Button
@@ -373,7 +362,7 @@ export default function Chart({ coinData, gD, title, ...rest }) {
               1Y
             </Button>
           </Flex>
-          <Flex justify="flex-start">
+          <Flex justify="flex-start" mt="40px" mb="5px">
             <Button
               variant="darkBrand"
               color="white"
@@ -409,37 +398,11 @@ export default function Chart({ coinData, gD, title, ...rest }) {
             >
               Convert
             </Button>
-            <Button
-              variant="darkBrand"
-              color="white"
-              fontSize="sm"
-              fontWeight="500"
-              borderRadius="70px"
-              px="16px"
-              py="5px"
-              ml="10px"
-            >
-              Deposit
-            </Button>
-
             <Button>
               <Flex flexDirection="column">
                 <Icon w="32px" h="32px" as={MdBarChart} color={brandColor} />
                 <Text>hi</Text>
               </Flex>
-            </Button>
-
-            <Button
-              variant="darkBrand"
-              color="white"
-              fontSize="sm"
-              fontWeight="500"
-              borderRadius="70px"
-              px="16px"
-              py="5px"
-              ml="10px"
-            >
-              Withdrawl
             </Button>
           </Flex>
         </Flex>

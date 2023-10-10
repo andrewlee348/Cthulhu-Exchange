@@ -33,6 +33,7 @@ def get_allcrypto():
 
 
 @app.route('/coins/<string:id>', methods=['GET'])
+@cache.memoize(timeout=60)
 def get_coin_details(id):
     try:
         pageData = cg.get_coin_by_id(id)

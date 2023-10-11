@@ -6,17 +6,23 @@ function Card(props) {
   const textColor = useColorModeValue("secondaryGray.900", "white");
   return (
     <Box __css={styles} {...rest}>
-      {title? (<Text
-        mt="45px"
-        mb="36px"
-        color={textColor}
-        fontSize="2xl"
-        ms="24px"
-        fontWeight="700"
-      >
-        {title}
-      </Text>) : (<></>)}
-      {children}
+      {title ? (
+        <Text
+          mt="10px"
+          mb="0px"
+          color={textColor}
+          fontSize="3xl"
+          ms="20px"
+          fontWeight="500"
+        >
+          {title}
+        </Text>
+      ) : (
+        <></>
+      )}
+      <Text mt="20px" ml="10px" mb="5px">
+        {children}
+      </Text>
     </Box>
   );
 }

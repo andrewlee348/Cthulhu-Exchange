@@ -10,12 +10,15 @@ import {
 // Custom components
 import MiniStatistics from "components/card/MiniStatistics";
 import Card from "components/card/Card.js";
+import BuyButton from "components/card/BuyButton.js";
 import LineChart from "components/charts/LineChart";
 import React, { useState, useEffect, useRef } from "react";
 import { IoCheckmarkCircle, IoMdAddCircle } from "react-icons/io5";
 import { MdBarChart, MdOutlineCalendarToday } from "react-icons/md";
 // Assets
 import { RiArrowUpSFill } from "react-icons/ri";
+import ActionButton from "../../../../components/card/ActionButton";
+import SellButton from "components/card/SellButton";
 
 const lineChartDataTotalSpent = [
   {
@@ -221,32 +224,16 @@ export default function Chart({ coinData, gD, title, ...rest }) {
               >
                 {coinData.market_data.current_price["usd"]}
               </Text>
-              {/* <Flex align="center">
+              <Flex align="center">
                 <Flex align="center">
                   <Icon as={RiArrowUpSFill} color="green.500" />
                   <Text color="green.500" fontSize="sm" fontWeight="700">
                     +2.45%
                   </Text>
                 </Flex>
-              </Flex> */}
+              </Flex>
             </Flex>
           </Flex>
-          {/* <Button
-            ms="auto"
-            align="center"
-            justifyContent="center"
-            bg={bgButton}
-            _hover={bgHover}
-            _focus={bgFocus}
-            _active={bgFocus}
-            w="37px"
-            h="37px"
-            lineHeight="100%"
-            borderRadius="10px"
-            {...rest}
-          >
-            <Icon as={MdBarChart} color={iconColor} w="24px" h="24px" />
-          </Button> */}
         </Flex>
       </Flex>
       <Flex w="100%" flexDirection={{ base: "column", lg: "row" }}>
@@ -362,48 +349,18 @@ export default function Chart({ coinData, gD, title, ...rest }) {
               1Y
             </Button>
           </Flex>
-          <Flex justify="flex-start" mt="40px" mb="5px">
-            <Button
-              variant="darkBrand"
-              color="white"
-              fontSize="sm"
-              fontWeight="500"
-              borderRadius="70px"
-              px="16px"
-              py="5px"
-            >
-              Buy
-            </Button>
-            <Button
-              variant="darkBrand"
-              color="white"
-              fontSize="sm"
-              fontWeight="500"
-              borderRadius="70px"
-              px="16px"
-              py="5px"
-              ml="10px"
-            >
-              Sell
-            </Button>
-            <Button
-              variant="darkBrand"
-              color="white"
-              fontSize="sm"
-              fontWeight="500"
-              borderRadius="70px"
-              px="16px"
-              py="5px"
-              ml="10px"
-            >
-              Convert
-            </Button>
-            <Button>
-              <Flex flexDirection="column">
-                <Icon w="32px" h="32px" as={MdBarChart} color={brandColor} />
-                <Text>hi</Text>
-              </Flex>
-            </Button>
+          <Flex flexDirection="row" justifyContent="center">
+            <Flex justifyContent="space-between" mt="40px" mb="5px">
+              <SellButton />
+              <SellButton />
+              <SellButton />
+            </Flex>
+            
+            <Flex justifyContent="space-between"  mt="40px" mb="5px" width="50%">
+              <SellButton />
+              <SellButton />
+              <SellButton />
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

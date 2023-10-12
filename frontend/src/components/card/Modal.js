@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Flex } from "@chakra-ui/react";
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Modal = ({ onClose, children, title }) => {
+    useEffect(() => {
+        const mmm = document.querySelector('.modal');
+        mmm.style.opacity = 1;
+    }, []);
+    const handleModalClose = () => {
+        const mmm = document.querySelector('.modal');
+        mmm.style.opacity = 0;
+
+        setTimeout(() => {
+            onClose();
+        }, 100); // wait for 300ms for the animation to complete
+    };
     return (
         <div
             className="modal"
+            onClick={handleModalClose}
             style={{
                 position: "fixed",
                 top: "50%",
@@ -18,10 +31,13 @@ const Modal = ({ onClose, children, title }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                transition: "opacity 0.1s ease-in-out",
+                opacity: 0,
             }}
         >
             <div
                 className="modal-content"
+                onClick={e => e.stopPropagation()}
                 style={{
                     position: "relative",
                     backgroundColor: "#fff",

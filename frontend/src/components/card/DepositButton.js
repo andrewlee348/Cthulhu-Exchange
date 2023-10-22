@@ -1,17 +1,17 @@
 import React from "react";
 import { Button, Flex } from "@chakra-ui/react";
 import ActionButton from "./ActionButton";
-import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
+import VerticalAlignBottomOutlinedIcon from "@mui/icons-material/VerticalAlignBottomOutlined";
 
-const BuyButton = () => {
-  const handleBuy = () => {
-    // handle buy logic here
+const DepositButton = () => {
+  const handleDeposit = () => {
+    // handle deposit logic here
   };
 
   return (
     <ActionButton
-      title="Buy"
-      icon={<CurrencyBitcoinIcon style={{ color: "white" }} />}
+      title="Deposit"
+      icon={<VerticalAlignBottomOutlinedIcon style={{ color: "white" }} />}
     >
       <Flex direction="column">
         <Button
@@ -23,13 +23,13 @@ const BuyButton = () => {
           px="16px"
           py="5px"
           ml="10px"
-          onClick={handleBuy}
+          onClick={handleDeposit}
         >
-          Buy
+          Deposit
         </Button>
       </Flex>
     </ActionButton>
   );
 };
 
-export default BuyButton;
+export default DepositButton;

@@ -10,7 +10,6 @@ import {
 // Custom components
 import MiniStatistics from "components/card/MiniStatistics";
 import Card from "components/card/Card.js";
-import BuyButton from "components/card/BuyButton.js";
 import LineChart from "components/charts/LineChart";
 import React, { useState, useEffect, useRef } from "react";
 import { IoCheckmarkCircle, IoMdAddCircle } from "react-icons/io5";
@@ -19,6 +18,11 @@ import { MdBarChart, MdOutlineCalendarToday } from "react-icons/md";
 import { RiArrowUpSFill } from "react-icons/ri";
 import ActionButton from "../../../../components/card/ActionButton";
 import SellButton from "components/card/SellButton";
+import BuyButton from "components/card/BuyButton";
+import ConvertButton from "components/card/ConvertButton";
+import DepositButton from "components/card/DepositButton";
+import WithdrawButton from "components/card/WithdrawButton";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 
 const lineChartDataTotalSpent = [
   {
@@ -349,17 +353,33 @@ export default function Chart({ coinData, gD, title, ...rest }) {
               1Y
             </Button>
           </Flex>
-          <Flex flexDirection="row" justifyContent="center">
-            <Flex justifyContent="space-between" mt="40px" mb="5px">
-              <SellButton />
-              <SellButton />
-              <SellButton />
+          <Flex flexDirection="row" justifyContent="center" mt="40px" mb="5px">
+            <Flex justifyContent="flex-end">
+              <Flex
+                flexDirection="row"
+                justifyContent="space-between"
+                width="220px"
+              >
+                <BuyButton />
+                <SellButton />
+                <ConvertButton />
+              </Flex>
             </Flex>
-            
-            <Flex justifyContent="space-between"  mt="40px" mb="5px" width="50%">
-              <SellButton />
-              <SellButton />
-              <SellButton />
+            <Flex flexDirection="column" mt="10px">
+              <MoreVertOutlinedIcon
+                alignItems="center"
+                style={{ fontSize: "40px", color: "rgb(220, 220, 220)" }}
+              />
+            </Flex>
+            <Flex justifyContent="flex-start">
+              <Flex
+                flexDirection="row"
+                justifyContent="space-between"
+                width="150px"
+              >
+                <DepositButton />
+                <WithdrawButton />
+              </Flex>
             </Flex>
           </Flex>
         </Flex>

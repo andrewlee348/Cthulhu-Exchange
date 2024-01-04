@@ -24,7 +24,7 @@ def get_allcrypto():
         return jsonify(cached_data)  # Return cached data if available
 
     try:
-        data = cg.get_coins_markets(vs_currency='usd')[:10]
+        data = cg.get_coins_markets(vs_currency='usd')
         cache.set('data', data)  # Store the API response in the cache
         return data, 200
 

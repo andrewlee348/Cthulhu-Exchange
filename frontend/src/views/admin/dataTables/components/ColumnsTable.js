@@ -108,7 +108,11 @@ export default function ColumnsTable(props) {
               <Tr
                 {...row.getRowProps()}
                 key={index}
-                onClick={() => history.push("/admin/coin/" + row.original.id)}
+                onClick={() =>
+                  history.push(
+                    "/admin/coin/" + row.original.id + "/" + row.original.symbol
+                  )
+                }
                 onMouseEnter={() => handleRowHover(index)}
                 onMouseLeave={handleRowMouseLeave}
                 style={{

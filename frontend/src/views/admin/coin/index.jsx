@@ -40,7 +40,8 @@ const API_BASE_URL = "http://127.0.0.1:5000";
 
 export default function Marketplace() {
   const url = useLocation().pathname.split("/");
-  const coinName = url[url.length - 1];
+  const coinName = url[url.length - 2];
+  const coinSymbol = url[url.length - 1];
 
   const [coinData, setCoinData] = useState(null);
   const [graphData, setGraphData] = useState(null);
@@ -50,7 +51,9 @@ export default function Marketplace() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/coins/${coinName}`);
+        const response = await axios.get(
+          `${API_BASE_URL}/coins/${coinName}/${coinSymbol}`
+        );
         setCoinData(response.data[0]);
         setGraphData(response.data[1]);
         console.log("api data", response.data);

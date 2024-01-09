@@ -67,6 +67,7 @@ export default function Settings() {
           price: "$ " + parseFloat(rawData.current_price).toLocaleString(),
           id: rawData.id,
           image: rawData.image,
+          symbol: rawData.symbol,
         }));
         setCryptoData(formattedData);
         console.log(formattedData);

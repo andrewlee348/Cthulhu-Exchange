@@ -1,6 +1,5 @@
 from flask import Blueprint
 import json
-from pycoingecko import CoinGeckoAPI
 from flask import Flask, jsonify, session, abort, redirect, request
 import requests
 from flask_cors import CORS  # Import the CORS module
@@ -8,7 +7,9 @@ from app import cache
 
 publicapi_bp = Blueprint('publicapi_bp', __name__)
 
-cg = CoinGeckoAPI()
+cg_link = "https://api.coingecko.com/api/v3/"
+cg_key_add = "&x_cg_demo_api_key=CG-pA4xG6eSJWXD5Gn97d8exvYw"
+cg_key_start = "?x_cg_demo_api_key=CG-pA4xG6eSJWXD5Gn97d8exvYw"
 
 @publicapi_bp.route('/')
 def hello():
@@ -23,10 +24,11 @@ def get_allcrypto():
     return jsonify(cached_data)
 
   try:
-    data = cg.get_coins_markets(vs_currency='usd')
+    response = requests.get(cg_link + "coins/markets?vs_currency=usd&per_page=100" + cg_key_add)
+    data = response.json()
     
     # Remove binancecoin
-    filt = {"binancecoin","staked-ether"}
+    filt = {"binancecoin","staked-ether","the-open-network"}
     filtered_data = list(filter(lambda x : x["id"] not in filt,data))
     
     cache.set('data', filtered_data, timeout=300)  # Store the API response in the cache
@@ -46,7 +48,9 @@ def get_coin_details(id,symbol):
     return jsonify(cached_data), 200
   
   try:
-    pageData = cg.get_coin_by_id(id)
+    response = requests.get(cg_link + "coins/" + id + cg_key_start)
+    pageData = response.json()
+    print(pageData["id"])
     graphData15 = requests.get(f'https://api.kraken.com/0/public/OHLC?pair={symbol}USD&interval=15').json()
     graphData1440 = requests.get(f'https://api.kraken.com/0/public/OHLC?pair={symbol}USD&interval=1440').json()
 

@@ -137,7 +137,7 @@ class OrderBook:
     if order_id in self.__order_map:
       order:Order = self.__order_map.pop(order_id)
       self.__queue_map[(order.get_price(),order.get_side())].remove(order_id)
-      self.__volume_map[self.__volume_map[(order.get_price(),order.get_side())]] -= order.get_volume()
+      self.__volume_map[(order.get_price(),order.get_side())] -= order.get_volume()
       if self.__volume_map[(order.get_price(),order.get_side())] == 0:
         self.__volume_map.pop((order.get_price(),order.get_side()))
     else:
@@ -163,139 +163,139 @@ class OrderBook:
     # print(self.__queue_map)
     # print()
       
-if __name__ == '__main__':
-  # ob = OrderBook()
-  # ob.print_book()
-  # while True:
-  #   print("Please place an order:")
-  #   print("Buy or Sell:")
-  #   side = input()
-  #   print("Price:")
-  #   price = float(input())
-  #   print("Volume:")
-  #   volume = float(input())
-  #   print("Client ID:")
-  #   id = input()
-  #   order = Order(side,price,volume,id)
-  #   ob.place_order(order)
-  #   ob.print_book()
-  #   print()
+# if __name__ == '__main__':
+#   # ob = OrderBook()
+#   # ob.print_book()
+#   # while True:
+#   #   print("Please place an order:")
+#   #   print("Buy or Sell:")
+#   #   side = input()
+#   #   print("Price:")
+#   #   price = float(input())
+#   #   print("Volume:")
+#   #   volume = float(input())
+#   #   print("Client ID:")
+#   #   id = input()
+#   #   order = Order(side,price,volume,id)
+#   #   ob.place_order(order)
+#   #   ob.print_book()
+#   #   print()
   
-  print("Testing")
-  ob = OrderBook()
-  # orders = [
-  #   # BUY orders
-  #   Order("BUY", 12.23, 10, "1"),
-  #   Order("BUY", 12.31, 20, "2"),
-  #   Order("BUY", 12.23, 5, "3"),
-  #   Order("BUY", 12.25, 15, "4"),
-  #   Order("BUY", 12.25, 30, "5"),
-  #   Order("BUY", 12.22, 7, "6"),
-  #   Order("BUY", 12.23, 3, "7"),
-  #   Order("BUY", 12.25, 18, "8"),
+#   print("Testing")
+#   ob = OrderBook()
+#   # orders = [
+#   #   # BUY orders
+#   #   Order("BUY", 12.23, 10, "1"),
+#   #   Order("BUY", 12.31, 20, "2"),
+#   #   Order("BUY", 12.23, 5, "3"),
+#   #   Order("BUY", 12.25, 15, "4"),
+#   #   Order("BUY", 12.25, 30, "5"),
+#   #   Order("BUY", 12.22, 7, "6"),
+#   #   Order("BUY", 12.23, 3, "7"),
+#   #   Order("BUY", 12.25, 18, "8"),
     
-  #   # SELL orders
-  #   Order("SELL", 13.55, 5, "9"),
-  #   Order("SELL", 13.31, 10, "10"),
-  #   Order("SELL", 13.50, 2, "11"),
-  #   Order("SELL", 13.45, 7, "12"),
-  #   Order("SELL", 13.40, 9, "13"),
-  #   Order("SELL", 13.60, 4, "14"),
-  #   Order("SELL", 13.50, 8, "15"),
-  #   Order("SELL", 13.55, 6, "16"),
+#   #   # SELL orders
+#   #   Order("SELL", 13.55, 5, "9"),
+#   #   Order("SELL", 13.31, 10, "10"),
+#   #   Order("SELL", 13.50, 2, "11"),
+#   #   Order("SELL", 13.45, 7, "12"),
+#   #   Order("SELL", 13.40, 9, "13"),
+#   #   Order("SELL", 13.60, 4, "14"),
+#   #   Order("SELL", 13.50, 8, "15"),
+#   #   Order("SELL", 13.55, 6, "16"),
     
-  #   # Edge cases
-  #   Order("BUY", 0.01, 1, "17"),
-  #   Order("BUY", 0.001, 5, "18"),
-  #   Order("BUY", 1000000, 0.5, "19"),
-  #   Order("SELL", 999.99, 10, "20"),
-  #   Order("SELL", 1000.00, 1, "21"),
-  #   Order("BUY", 12.25, 0.001, "22"),
-  #   Order("BUY", 12.23, 0.0001, "23"),
-  #   Order("SELL", 13.31, 0.00001, "24"),
+#   #   # Edge cases
+#   #   Order("BUY", 0.01, 1, "17"),
+#   #   Order("BUY", 0.001, 5, "18"),
+#   #   Order("BUY", 1000000, 0.5, "19"),
+#   #   Order("SELL", 999.99, 10, "20"),
+#   #   Order("SELL", 1000.00, 1, "21"),
+#   #   Order("BUY", 12.25, 0.001, "22"),
+#   #   Order("BUY", 12.23, 0.0001, "23"),
+#   #   Order("SELL", 13.31, 0.00001, "24"),
     
-  #   # Large volume
-  #   Order("BUY", 12.23, 10000, "25"),
-  #   Order("SELL", 13.55, 5000, "26"),
+#   #   # Large volume
+#   #   Order("BUY", 12.23, 10000, "25"),
+#   #   Order("SELL", 13.55, 5000, "26"),
     
-  #   # Decimal prices and volumes
-  #   Order("BUY", 12.234, 10.123, "27"),
-  #   Order("BUY", 12.315, 20.456, "28"),
-  #   Order("SELL", 13.556, 5.789, "29"),
+#   #   # Decimal prices and volumes
+#   #   Order("BUY", 12.234, 10.123, "27"),
+#   #   Order("BUY", 12.315, 20.456, "28"),
+#   #   Order("SELL", 13.556, 5.789, "29"),
     
-  #   # # Negative prices
-  #   # Order("BUY", -12.23, 10, "30"),
-  #   # Order("BUY", -12.31, 20, "31"),
-  #   # Order("SELL", -13.55, 5, "32"),
+#   #   # # Negative prices
+#   #   # Order("BUY", -12.23, 10, "30"),
+#   #   # Order("BUY", -12.31, 20, "31"),
+#   #   # Order("SELL", -13.55, 5, "32"),
     
-  #   # # Negative volumes
-  #   # Order("BUY", 12.23, -10, "33"),
-  #   # Order("BUY", 12.31, -20, "34"),
-  #   # Order("SELL", 13.55, -5, "35"),
+#   #   # # Negative volumes
+#   #   # Order("BUY", 12.23, -10, "33"),
+#   #   # Order("BUY", 12.31, -20, "34"),
+#   #   # Order("SELL", 13.55, -5, "35"),
     
-  #   # Large client IDs
-  #   Order("BUY", 12.23, 10, "100000"),
-  #   Order("BUY", 12.31, 20, "100001"),
-  #   Order("SELL", 13.55, 5, "100002"),
-  #   ]
-  orders = [
-    # BUY orders
-    Order("SELL", 12.23, 10, "1"),
-    Order("SELL", 12.31, 20, "2"),
-    Order("SELL", 12.23, 5, "3"),
-    Order("SELL", 12.25, 15, "4"),
-    Order("SELL", 12.25, 30, "5"),
-    Order("SELL", 12.22, 7, "6"),
-    Order("SELL", 12.23, 3, "7"),
-    Order("SELL", 12.25, 18, "8"),
+#   #   # Large client IDs
+#   #   Order("BUY", 12.23, 10, "100000"),
+#   #   Order("BUY", 12.31, 20, "100001"),
+#   #   Order("SELL", 13.55, 5, "100002"),
+#   #   ]
+#   orders = [
+#     # BUY orders
+#     Order("SELL", 12.23, 10, "1"),
+#     Order("SELL", 12.31, 20, "2"),
+#     Order("SELL", 12.23, 5, "3"),
+#     Order("SELL", 12.25, 15, "4"),
+#     Order("SELL", 12.25, 30, "5"),
+#     Order("SELL", 12.22, 7, "6"),
+#     Order("SELL", 12.23, 3, "7"),
+#     Order("SELL", 12.25, 18, "8"),
     
-    # SELL orders
-    Order("BUY", 13.55, 5, "9"),
-    Order("BUY", 13.31, 10, "10"),
-    Order("BUY", 13.50, 2, "11"),
-    Order("BUY", 13.45, 7, "12"),
-    Order("BUY", 13.40, 9, "13"),
-    Order("BUY", 13.60, 4, "14"),
-    Order("BUY", 13.50, 8, "15"),
-    Order("BUY", 13.55, 6, "16"),
+#     # SELL orders
+#     Order("BUY", 13.55, 5, "9"),
+#     Order("BUY", 13.31, 10, "10"),
+#     Order("BUY", 13.50, 2, "11"),
+#     Order("BUY", 13.45, 7, "12"),
+#     Order("BUY", 13.40, 9, "13"),
+#     Order("BUY", 13.60, 4, "14"),
+#     Order("BUY", 13.50, 8, "15"),
+#     Order("BUY", 13.55, 6, "16"),
     
-    # Edge cases
-    Order("SELL", 0.01, 1, "17"),
-    Order("SELL", 0.001, 5, "18"),
-    Order("SELL", 1000000, 0.5, "19"),
-    Order("BUY", 999.99, 10, "20"),
-    Order("BUY", 1000.00, 1, "21"),
-    Order("SELL", 12.25, 0.001, "22"),
-    Order("SELL", 12.23, 0.0001, "23"),
-    Order("BUY", 13.31, 0.00001, "24"),
+#     # Edge cases
+#     Order("SELL", 0.01, 1, "17"),
+#     Order("SELL", 0.001, 5, "18"),
+#     Order("SELL", 1000000, 0.5, "19"),
+#     Order("BUY", 999.99, 10, "20"),
+#     Order("BUY", 1000.00, 1, "21"),
+#     Order("SELL", 12.25, 0.001, "22"),
+#     Order("SELL", 12.23, 0.0001, "23"),
+#     Order("BUY", 13.31, 0.00001, "24"),
     
-    # Large volume
-    Order("SELL", 12.23, 10000, "25"),
-    Order("BUY", 13.55, 5000, "26"),
+#     # Large volume
+#     Order("SELL", 12.23, 10000, "25"),
+#     Order("BUY", 13.55, 5000, "26"),
     
-    # Decimal prices and volumes
-    Order("SELL", 12.234, 10.123, "27"),
-    Order("SELL", 12.315, 20.456, "28"),
-    Order("BUY", 13.556, 5.789, "29"),
+#     # Decimal prices and volumes
+#     Order("SELL", 12.234, 10.123, "27"),
+#     Order("SELL", 12.315, 20.456, "28"),
+#     Order("BUY", 13.556, 5.789, "29"),
     
-    # # Negative prices
-    # Order("SELL", -12.23, 10, "30"),
-    # Order("SELL", -12.31, 20, "31"),
-    # Order("BUY", -13.55, 5, "32"),
+#     # # Negative prices
+#     # Order("SELL", -12.23, 10, "30"),
+#     # Order("SELL", -12.31, 20, "31"),
+#     # Order("BUY", -13.55, 5, "32"),
     
-    # # Negative volumes
-    # Order("SELL", 12.23, -10, "33"),
-    # Order("SELL", 12.31, -20, "34"),
-    # Order("BUY", 13.55, -5, "35"),
+#     # # Negative volumes
+#     # Order("SELL", 12.23, -10, "33"),
+#     # Order("SELL", 12.31, -20, "34"),
+#     # Order("BUY", 13.55, -5, "35"),
     
-    # Large client IDs
-    Order("SELL", 12.23, 10, "100000"),
-    Order("SELL", 12.31, 20, "100001"),
-    Order("BUY", 13.55, 5, "100002"),
-    ]
+    # # Large client IDs
+    # Order("SELL", 12.23, 10, "100000"),
+    # Order("SELL", 12.31, 20, "100001"),
+    # Order("BUY", 13.55, 5, "100002"),
+    # ]
   
-  for order in orders:
-    ob.place_order(order)
-  ob.print_book()
-  # ob.cancel_order("5")
-  # ob.print_book()
+#   for order in orders:
+#     ob.place_order(order)
+#   ob.print_book()
+#   # ob.cancel_order("5")
+#   # ob.print_book()

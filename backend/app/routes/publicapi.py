@@ -11,11 +11,11 @@ cg_link = "https://api.coingecko.com/api/v3/"
 cg_key_add = "&x_cg_demo_api_key=CG-pA4xG6eSJWXD5Gn97d8exvYw"
 cg_key_start = "?x_cg_demo_api_key=CG-pA4xG6eSJWXD5Gn97d8exvYw"
 
-@publicapi_bp.route('/')
+@publicapi_bp.route('/', methods=['GET'])
 def hello():
     return jsonify(message='Hello, World!')
 
-@publicapi_bp.route('/get_allcrypto')
+@publicapi_bp.route('/get_allcrypto', methods=['GET'])
 def get_allcrypto():
   
   cached_data = cache.get('data')

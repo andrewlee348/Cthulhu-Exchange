@@ -1,6 +1,6 @@
 from app import create_app
 import json
-from pycoingecko import CoinGeckoAPI
+# from pycoingecko import CoinGeckoAPI
 from flask import Flask, jsonify, session, abort, redirect, request
 import requests
 from flask_cors import CORS  # Import the CORS module

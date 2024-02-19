@@ -53,7 +53,7 @@ def place_order():
   return jsonify(message=f'order placed for {coin}', body=jsonifyPrint(order)),200
 
 @authapi_bp.route('/order', methods=['DELETE'])
-def get_order():
+def delete_order():
   body = request.get_json()
   coin = body['coin']
   order_id = body['order_id']
@@ -61,7 +61,24 @@ def get_order():
   
   order_book_dict[coin].print_book()
   
-  return jsonify(message=f'order {order_id} has been cancelled'),200
+  return jsonify(message=f'order {order_id} for {coin} has been cancelled'),200
+
+@authapi_bp.route('/order', methods=['GET'])
+def get_order():
+  body = request.get_json()
+  coin = body['coin']
+  order_id = body['order_id']
+  order = order_book_dict[coin].get_order(order_id).to_dict()
+  
+  return order,200
+
+@authapi_bp.route('/order/book', methods=['GET'])
+def get_order_book():
+  body = request.get_json()
+  coin = body['coin']
+  order_book = order_book_dict[coin].to_dict()
+
+  return order_book,200
 
 def jsonifyPrint(toPrint):
   output_buffer = StringIO()

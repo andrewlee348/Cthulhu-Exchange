@@ -1,8 +1,9 @@
 import heapq
 from datetime import datetime
 from enum import Enum
+import json
 
-class MinHeapObj(object):
+class MinHeapObj(object): # Queue
   def __init__(self, order):
     self.price = order.get_price()
     self.pq = [order]
@@ -10,6 +11,9 @@ class MinHeapObj(object):
   def __eq__(self, other): return self.price == other.price
   def __str__(self): return str(self.price)
   def __repr__(self): return f"\nPrice of Queue: {self.price}\nOrders in Queue: {self.pq}"
+  def to_list(self):
+    """Converts the MinHeapObj to a list."""
+    return [instance.to_dict() for instance in self.pq]
   def push(self, order):
     self.pq.append(order)
   def pop(self):
@@ -22,10 +26,13 @@ class MinHeapObj(object):
 class MaxHeapObj(MinHeapObj):
   def __lt__(self, other): return self.price > other.price
   
-class MinHeap(object):
+class MinHeap(object): # Heap
   def __init__(self): self.h = []
   def __repr__(self):
     return f"{self.h}"
+  def to_list(self):
+    """Converts the MinHeap to a list of lists."""
+    return [instance.to_list() for instance in self.h]
   def heappush(self, order): 
     toggle = True
     for instance in self.h:
@@ -66,6 +73,16 @@ class Order:
   def __repr__(self):
     return f"(Order Id: {self.__order_id}, Side: {'BUY' if self.__side == 'BUY' else 'SELL'}, Price: {self.__price}, Volume: {self.__volume})"
   
+  def to_dict(self):
+    """Converts the Order object to a dictionary."""
+    return {
+      "order_id": self.__order_id,
+      "side": self.__side,
+      "price": self.__price,
+      "volume": self.__volume,
+      "client_id": self.__client_id
+    }
+  
   def get_time_stamp(self) -> float:
     return self.__time_stamp
   
@@ -89,11 +106,29 @@ class Order:
 
 class OrderBook:
   def __init__(self):
-    self.__best_ask = MinHeap()
-    self.__best_bid = MaxHeap()
-    self.__order_map = {}
-    self.__volume_map = {}
-    self.__queue_map = {}
+    self.__best_ask = MinHeap() # MinHeap to store asks
+    self.__best_bid = MaxHeap() # MaxHeap to store bids
+    self.__order_map = {} # Maps order_id to Order
+    self.__volume_map = {} # Maps price,side to volume
+    self.__queue_map = {} # Maps price,side to queue
+
+  def to_dict(self) -> dict:
+    return {
+      "best_ask": self.__best_ask.to_list(),
+      "best_bid": self.__best_bid.to_list(),
+      "order_map": {
+        key: value.to_dict()
+        for key, value in self.__order_map.items()
+      },
+      "volume_map": {
+            str(key): value
+            for key, value in self.__volume_map.items()
+        },
+      "queue_map": {
+            str(key): value.to_list()
+            for key, value in self.__queue_map.items()
+        },
+    }
   
   def place_order(self, order:Order):
     same_book = self.__best_bid if order.get_side() == "BUY" else self.__best_ask
@@ -142,6 +177,13 @@ class OrderBook:
         self.__volume_map.pop((order.get_price(),order.get_side()))
     else:
       print(f"No order with id: {order_id}")
+  
+  def get_order(self, order_id):
+    if order_id in self.__order_map:
+      order:Order = self.__order_map[order_id]
+      return order
+    else:
+      return f"No order with id: {order_id}"
   
   def print_book(self):
     print("Sell Side:")

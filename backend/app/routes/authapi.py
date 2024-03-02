@@ -39,48 +39,55 @@ order_book_dict:dict[str, OrderBook] = {}
     
 @authapi_bp.route('/order', methods=['POST'])
 def place_order():
-  body = request.get_json()
-  coin = body['coin']
-  order_details = body['order_details']
-  if coin not in order_book_dict:
-    temp = OrderBook()
-    order_book_dict.update({coin:temp})
-  order = Order(order_details['side'],order_details['price'],order_details['volume'],order_details['client_id'])
-  order_book_dict[coin].place_order(order)
-  
-  order_book_dict[coin].print_book()
-  
-  return jsonify(message=f'order placed for {coin}', body=jsonifyPrint(order)),200
+  try:
+    body = request.get_json()
+    coin = body['coin']
+    order_details = body['order_details']
+    if coin not in order_book_dict:
+      temp = OrderBook()
+      order_book_dict.update({coin:temp})
+    order = Order(order_details['side'],order_details['price'],order_details['volume'],order_details['client_id'])
+    order_book_dict[coin].place_order(order)
+    
+    order_book_dict[coin].print_book()
+    
+    return jsonify(message=f'order placed for {coin}', body=order.to_dict()),200
+  except Exception as err:
+    return err
 
 @authapi_bp.route('/order', methods=['DELETE'])
 def delete_order():
-  body = request.get_json()
-  coin = body['coin']
-  order_id = body['order_id']
-  order_book_dict[coin].cancel_order(order_id)
-  
-  order_book_dict[coin].print_book()
-  
-  return jsonify(message=f'order {order_id} for {coin} has been cancelled'),200
+  try:
+    body = request.get_json()
+    coin = body['coin']
+    order_id = body['order_id']
+    order_book_dict[coin].cancel_order(order_id)
+    
+    order_book_dict[coin].print_book()
+    
+    return jsonify(message=f'order {order_id} for {coin} has been cancelled'),200
+  except Exception as err:
+    return err
 
 @authapi_bp.route('/order', methods=['GET'])
 def get_order():
-  body = request.get_json()
-  coin = body['coin']
-  order_id = body['order_id']
-  order = order_book_dict[coin].get_order(order_id).to_dict()
-  
-  return order,200
+  try:
+    body = request.get_json()
+    coin = body['coin']
+    order_id = body['order_id']
+    order = order_book_dict[coin].get_order(order_id).to_dict()
+
+    return order,200
+  except Exception as err:
+    return err
 
 @authapi_bp.route('/order/book', methods=['GET'])
 def get_order_book():
-  body = request.get_json()
-  coin = body['coin']
-  order_book = order_book_dict[coin].to_dict()
+  try:
+    body = request.get_json()
+    coin = body['coin']
+    order_book = order_book_dict[coin].to_dict()
 
-  return order_book,200
-
-def jsonifyPrint(toPrint):
-  output_buffer = StringIO()
-  print(toPrint, file=output_buffer)
-  return output_buffer.getvalue()
+    return order_book,200
+  except Exception as err:
+    return err
